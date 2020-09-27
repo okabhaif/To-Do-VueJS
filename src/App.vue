@@ -36,12 +36,17 @@
 
 <script>
 export default {
-    name: 'RegularToolbar',
+  name: 'RegularToolbar',
   data() {
+    let todos = localStorage.getItem('todos');
+    if(todos){
+      todos = JSON.parse(todos);
+  } else {
+    todos = [];
+  }
     return {
-           title: "To do list app",
-
-      todos: [],
+      title: "To do list app",
+      todos,
       currentTodo: '',
       editTodoId: null
     };
@@ -57,13 +62,15 @@ export default {
         label: this.currentTodo, 
         completed: false
         });
-      this.currentTodo = '';
+        localStorage.setItem('todos', JSON.stringify(this.todos));
+        this.currentTodo = '';
       }
     },
-    removeTodo(todo){
 
-var index = this.todos.indexOf(todo);
-this.todos.splice(index, 1);
+    removeTodo(todo){
+      const index = this.todos.indexOf(todo);
+      this.todos.splice(index, 1);
+      localStorage.setItem('todos', JSON.stringify(this.todos));
     },
     clickToEdit (todo) {
       this.editTodoId = todo.id; 
@@ -71,7 +78,6 @@ this.todos.splice(index, 1);
     saveEdit(){
       this.editTodoId = null;
     }
-    
   }
 };
 </script>
