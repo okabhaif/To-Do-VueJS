@@ -20,7 +20,7 @@
       <md-list-item class="todo-title">Things I need to do:</md-list-item>
       <md-list-item class="list-item" v-for="todo in todos" :key="todo.id">
         <md-checkbox type="checkbox" v-model="todo.completed"></md-checkbox>
-          <span v-on:click.prevent="clickToEdit(todo)" v-show="editTodoId !== todo.id" :class="{ completed: todo.completed }"> 
+          <span v-on:click.stop.prevent="clickToEdit(todo)" v-show="editTodoId !== todo.id" :class="{ completed: todo.completed }"> 
             {{ todo.label }} 
           </span> 
         
