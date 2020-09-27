@@ -19,12 +19,12 @@
     <md-list class="todos" v-if="showTodos()">
       <md-list-item class="todo-title">Things I need to do:</md-list-item>
       <md-list-item class="list-item" v-for="todo in todos" :key="todo.id">
-        <md-checkbox v-on:click.stop type="checkbox" v-model="todo.completed"></md-checkbox>
+        <md-checkbox type="checkbox" v-model="todo.completed"></md-checkbox>
           <span v-on:click.stop.prevent="clickToEdit(todo)" v-show="editTodoId !== todo.id" :class="{ completed: todo.completed }"> 
             {{ todo.label }} 
           </span> 
         
-        <input v-model="todo.label" v-show="editTodoId == todo.id" v-on:keyup.enter="saveEdit">
+        <input v-on:click.stop.prevent v-model="todo.label" v-show="editTodoId == todo.id" v-on:keyup.enter="saveEdit">
         <md-button v-on:click.prevent="removeTodo(todo)">remove</md-button> 
       </md-list-item>
     </md-list>
